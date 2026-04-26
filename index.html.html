@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAJENDRA — Recruitment & Delivery Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --navy:    #0F1D3A;
+  --navy2:   #1A2E55;
+  --blue:    #1D3A7A;
+  --sky:     #2D6BBF;
+  --sky-l:   #4D8DD6;
+  --amber:   #B56800;
+  --amber-l: #D98A10;
+  --teal:    #097A6A;
+  --coral:   #B83425;
+  --bg:      #E4ECF7;
+  --bg2:     #D4E0F2;
+  --bg3:     #F0F5FC;
+  --text:    #0F1D3A;
+  --text2:   #1E3060;
+  --text3:   #3D5080;
+  --border:  rgba(29,58,122,0.22);
+  --shadow:  0 4px 24px rgba(15,29,58,0.13);
+  --shadow2: 0 12px 48px rgba(15,29,58,0.20);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 5vw;
+  background:rgba(228,236,247,0.97);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 20px rgba(26,39,68,0.07);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:800;font-size:1.5rem;color:var(--navy);letter-spacing:3px}
+.nav-logo em{color:var(--sky);font-style:normal}
+.nav-links{display:flex;gap:22px}
+.nav-links a{color:var(--text3);text-decoration:none;font-size:0.78rem;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;transition:all 0.2s;padding-bottom:2px;border-bottom:2px solid transparent}
+.nav-links a:hover{color:var(--blue);border-bottom-color:var(--amber)}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* HERO */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;padding:120px 5vw 80px;
+  background:linear-gradient(150deg,#D8E6F8 0%,#EAF0FC 45%,#D4EDE8 100%);
+}
+.hero-orb1{position:absolute;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(74,127,212,0.11) 0%,transparent 70%);top:-200px;right:-120px;pointer-events:none}
+.hero-orb2{position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(13,140,122,0.09) 0%,transparent 70%);bottom:-80px;left:-60px;pointer-events:none}
+.hero-dots{position:absolute;inset:0;opacity:0.55;background-image:radial-gradient(circle,rgba(29,58,122,0.25) 1px,transparent 1px);background-size:30px 30px}
+.hero-inner{position:relative;max-width:1100px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 260px;gap:60px;align-items:center}
+@media(max-width:800px){.hero-inner{grid-template-columns:1fr}}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(74,127,212,0.1);border:1.5px solid rgba(74,127,212,0.28);
+  border-radius:100px;padding:6px 18px;margin-bottom:28px;
+  font-size:0.74rem;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
+  animation:fadeUp 0.6s ease both;
+}
+.hero-badge .dot{width:7px;height:7px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.75)}}
+
+h1.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,6.5vw,5.5rem);
+  font-weight:800;line-height:1.05;letter-spacing:-2px;
+  padding:4px 6px 8px 0;
+  animation:fadeUp 0.7s 0.1s ease both;
+}
+h1.hero-name em{
+  display:block;font-style:normal;
+  background:linear-gradient(135deg,#1D3A7A 0%,#2D6BBF 55%,#097A6A 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  padding-bottom:0.25em;
+  margin-bottom:-0.15em;
+}
+.hero-subtitle{
+  display:block;font-size:clamp(0.95rem,1.8vw,1.15rem);font-weight:600;
+  color:var(--text2);letter-spacing:2.5px;text-transform:uppercase;
+  margin-top:18px;font-family:'Plus Jakarta Sans',sans-serif;
+  animation:fadeUp 0.7s 0.15s ease both;
+}
+.hero-sub{
+  margin-top:18px;max-width:570px;
+  font-size:1.0rem;line-height:1.78;color:var(--text3);font-weight:400;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+.hero-stats{
+  display:flex;gap:0;margin-top:40px;width:fit-content;
+  border:1.5px solid var(--border);border-radius:12px;overflow:hidden;
+  background:var(--bg3);box-shadow:var(--shadow);
+  animation:fadeUp 0.7s 0.3s ease both;
+}
+.stat-item{padding:18px 24px;text-align:center}
+.stat-item+.stat-item{border-left:1.5px solid var(--border)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:800;color:var(--navy);line-height:1}
+.stat-num em{color:var(--sky);font-style:normal}
+.stat-label{font-size:0.67rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-top:3px;font-weight:600}
+.hero-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;animation:fadeUp 0.7s 0.4s ease both}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;
+  padding:13px 28px;border-radius:8px;font-weight:700;font-size:0.87rem;
+  text-decoration:none;letter-spacing:0.5px;transition:all 0.25s;
+  border:none;cursor:pointer;box-shadow:0 4px 20px rgba(46,74,140,0.28);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(46,74,140,0.38)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--navy);padding:13px 28px;border-radius:8px;
+  font-weight:600;font-size:0.87rem;text-decoration:none;letter-spacing:0.5px;
+  border:1.5px solid rgba(46,74,140,0.22);transition:all 0.25s;cursor:pointer;
+}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);background:rgba(46,74,140,0.05)}
+.hero-card{
+  background:var(--bg3);border:1.5px solid var(--border);border-radius:16px;
+  padding:28px 24px;box-shadow:var(--shadow2);
+  display:flex;flex-direction:column;gap:12px;
+  animation:fadeUp 0.9s 0.5s ease both;
+}
+@media(max-width:800px){.hero-card{display:none}}
+.hc-lbl{font-size:0.67rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:4px}
+.hc-pill{
+  display:flex;align-items:center;gap:10px;padding:9px 13px;
+  background:var(--bg2);border-radius:8px;font-size:0.81rem;font-weight:600;color:var(--text2);
+  border:1px solid var(--border);transition:all 0.2s;
+}
+.hc-pill:hover{background:rgba(74,127,212,0.1);border-color:rgba(74,127,212,0.25);color:var(--blue)}
+.hc-pill span{font-size:1.1rem}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* COMMON */
+section{padding:86px 5vw}
+.max-w{max-width:1100px;margin:0 auto}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--sky);
+  text-transform:uppercase;letter-spacing:3px;margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;font-weight:500;
+}
+.eyebrow::before{content:'';display:block;width:22px;height:2px;background:var(--amber);border-radius:2px}
+h2.stitle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,3.5vw,3rem);font-weight:800;line-height:1.15;
+  color:var(--navy);margin-bottom:12px;
+}
+h2.stitle em{color:var(--sky);font-style:normal}
+.sdesc{color:var(--text3);font-size:0.96rem;max-width:540px;line-height:1.76;margin-bottom:48px}
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(46,74,140,0.14),transparent);margin:0 5vw}
+
+/* EXPERTISE */
+#expertise{background:var(--bg3)}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:18px}
+.exp-card{
+  background:var(--bg);border:1.5px solid var(--border);border-radius:12px;
+  padding:30px 26px;transition:all 0.3s;position:relative;overflow:hidden;
+}
+.exp-card:hover{transform:translateY(-5px);border-color:rgba(74,127,212,0.38);box-shadow:var(--shadow2);background:var(--bg3)}
+.exp-num{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--sky);letter-spacing:2px;margin-bottom:12px;font-weight:500}
+.exp-icon{font-size:1.9rem;margin-bottom:14px;display:block}
+.exp-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:9px}
+.exp-card p{color:var(--text3);font-size:0.87rem;line-height:1.65}
+.exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.exp-tag{font-size:0.68rem;padding:3px 10px;border-radius:100px;background:rgba(74,127,212,0.09);color:var(--blue);border:1px solid rgba(74,127,212,0.18);font-family:'JetBrains Mono',monospace;letter-spacing:0.3px}
+
+/* SKILLS */
+#skills{background:var(--bg)}
+.skills-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start}
+@media(max-width:768px){.skills-grid{grid-template-columns:1fr}}
+.skill-bars{display:flex;flex-direction:column;gap:17px}
+.skill-hdr{display:flex;justify-content:space-between;margin-bottom:7px;font-size:0.83rem}
+.skill-name{color:var(--text2);font-weight:600}
+.skill-pct{color:var(--sky);font-family:'JetBrains Mono',monospace;font-size:0.77rem}
+.skill-track{height:6px;background:rgba(29,58,122,0.16);border-radius:3px;overflow:hidden}
+.skill-fill{height:100%;border-radius:3px;background:linear-gradient(to right,var(--sky),var(--teal));width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
+.chart-box{background:var(--bg3);border:1.5px solid var(--border);border-radius:12px;padding:26px}
+.chart-lbl{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:5px}
+.chart-sub{font-size:0.77rem;color:var(--text3);margin-bottom:18px}
+.charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+@media(max-width:680px){.charts-2col{grid-template-columns:1fr}}
+
+/* REGIONS — 4 cards */
+#regions{background:var(--bg3)}
+.regions-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:660px){.regions-grid{grid-template-columns:1fr}}
+.region-card{
+  border-radius:14px;padding:30px 26px;position:relative;overflow:hidden;
+  border:1.5px solid;transition:all 0.3s;
+}
+.region-card:hover{transform:translateY(-5px);box-shadow:var(--shadow2)}
+.rc-usa{background:linear-gradient(145deg,#D8EBFC 0%,#EBF3FF 100%);border-color:rgba(45,107,191,0.32)}
+.rc-latam{background:linear-gradient(145deg,#D4EDEA 0%,#E8F8F5 100%);border-color:rgba(9,122,106,0.30)}
+.rc-apac{background:linear-gradient(145deg,#F5E6CE 0%,#FDF6E8 100%);border-color:rgba(181,104,0,0.30)}
+.rc-india{background:linear-gradient(145deg,#F8DBD7 0%,#FDF0EE 100%);border-color:rgba(184,52,37,0.30)}
+.region-flag{font-size:2.6rem;margin-bottom:12px;display:block}
+.region-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:800;margin-bottom:4px}
+.rc-usa .region-name{color:var(--blue)}
+.rc-latam .region-name{color:var(--teal)}
+.rc-apac .region-name{color:var(--amber)}
+.rc-india .region-name{color:var(--coral)}
+.region-badge{
+  display:inline-block;font-size:0.66rem;font-family:'JetBrains Mono',monospace;
+  letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
+  padding:2px 10px;border-radius:100px;margin-bottom:13px;
+}
+.rc-usa .region-badge{background:rgba(74,127,212,0.12);color:var(--blue)}
+.rc-latam .region-badge{background:rgba(13,140,122,0.12);color:var(--teal)}
+.rc-apac .region-badge{background:rgba(201,122,8,0.12);color:var(--amber)}
+.rc-india .region-badge{background:rgba(201,69,53,0.12);color:var(--coral)}
+.region-desc{font-size:0.86rem;line-height:1.65;color:var(--text3);margin-bottom:16px}
+.region-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.region-list li{font-size:0.83rem;color:var(--text2);display:flex;align-items:flex-start;gap:9px;font-weight:500}
+.region-list li::before{content:'→';font-size:0.72rem;flex-shrink:0;margin-top:2px}
+.rc-usa .region-list li::before{color:var(--blue)}
+.rc-latam .region-list li::before{color:var(--teal)}
+.rc-apac .region-list li::before{color:var(--amber)}
+.rc-india .region-list li::before{color:var(--coral)}
+.region-deco{position:absolute;right:-14px;bottom:-18px;font-size:6.5rem;opacity:0.055;pointer-events:none;line-height:1}
+
+/* SERVICES */
+#services{background:var(--bg)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:18px}
+.svc-card{
+  background:var(--bg3);border:1.5px solid var(--border);border-radius:14px;
+  padding:34px 28px;transition:all 0.3s;position:relative;
+}
+.svc-card.featured{
+  background:linear-gradient(135deg,#D8E8FC 0%,#EBF2FF 100%);
+  border-color:rgba(45,107,191,0.45);
+  box-shadow:0 0 0 4px rgba(45,107,191,0.10);
+}
+.svc-card:hover{transform:translateY(-5px);box-shadow:var(--shadow2);border-color:rgba(74,127,212,0.38)}
+.svc-badge{position:absolute;top:18px;right:18px;font-size:0.63rem;background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;padding:3px 11px;border-radius:100px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.svc-icon{font-size:2.2rem;margin-bottom:18px;display:block}
+.svc-card h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:800;color:var(--navy);margin-bottom:9px}
+.svc-card>p{color:var(--text3);font-size:0.87rem;line-height:1.65}
+.svc-list{margin-top:17px;display:flex;flex-direction:column;gap:8px;list-style:none}
+.svc-list li{font-size:0.84rem;color:var(--text2);display:flex;align-items:flex-start;gap:9px;font-weight:500}
+.svc-dot{width:6px;height:6px;background:var(--sky);border-radius:50%;margin-top:6px;flex-shrink:0}
+
+/* TIMELINE */
+#experience{background:var(--bg3)}
+.timeline{position:relative;padding-left:32px;max-width:780px}
+.timeline::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:2px;background:linear-gradient(to bottom,var(--sky),rgba(74,127,212,0.1))}
+.tl-item{position:relative;margin-bottom:50px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-39px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--sky);box-shadow:0 0 0 4px rgba(74,127,212,0.18),0 0 0 8px rgba(74,127,212,0.06)}
+.tl-company{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:800;color:var(--navy)}
+.tl-role{font-size:0.76rem;color:var(--sky);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-weight:500;margin:6px 0 3px}
+.tl-period{font-size:0.79rem;color:var(--text3);margin-bottom:13px}
+.tl-desc{color:var(--text3);font-size:0.89rem;line-height:1.74;max-width:660px}
+.tl-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.chip{font-size:0.69rem;padding:4px 11px;border-radius:100px;background:rgba(46,74,140,0.07);color:var(--blue);border:1px solid rgba(46,74,140,0.13);font-family:'JetBrains Mono',monospace;font-weight:500}
+
+/* TOOLS */
+#tools{background:var(--bg)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:15px}
+.tool-group{background:var(--bg3);border:1.5px solid var(--border);border-radius:12px;padding:22px}
+.tg-label{font-size:0.67rem;color:var(--amber);letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-weight:700;margin-bottom:13px}
+.tg-tags{display:flex;flex-wrap:wrap;gap:7px}
+.tg-tag{font-size:0.78rem;color:var(--text2);background:var(--bg2);padding:5px 11px;border-radius:6px;font-weight:600;border:1px solid var(--border)}
+
+/* LEGAL */
+#legal{background:var(--bg3)}
+.legal-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+@media(max-width:760px){.legal-layout{grid-template-columns:1fr}}
+.legal-vis{background:linear-gradient(135deg,#D8E4F5,#E8F0FC);border:1.5px solid rgba(29,58,122,0.24);border-radius:16px;padding:40px 32px;text-align:center}
+.legal-icon-big{font-size:4rem;margin-bottom:18px;display:block}
+.legal-deg{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:800;color:var(--navy);margin-bottom:5px}
+.legal-uni{color:var(--text3);font-size:0.88rem;margin-bottom:22px}
+.legal-div{height:1px;background:var(--border);margin:0 auto 18px;width:75%}
+.legal-note{font-size:0.82rem;color:var(--text3);line-height:1.65}
+.legal-caps{display:flex;flex-direction:column;gap:13px}
+.lc{display:flex;gap:13px;align-items:flex-start;background:var(--bg);border:1.5px solid var(--border);padding:17px 19px;border-radius:10px;transition:all 0.2s}
+.lc:hover{border-color:rgba(74,127,212,0.32);box-shadow:var(--shadow);background:var(--bg3)}
+.lc-icon{font-size:1.35rem;flex-shrink:0;margin-top:1px}
+.lc h4{font-size:0.88rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.lc p{font-size:0.8rem;color:var(--text3);line-height:1.5}
+
+/* EDUCATION */
+#education{background:var(--bg)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}
+@media(max-width:580px){.edu-grid{grid-template-columns:1fr}}
+.edu-card{background:var(--bg3);border:1.5px solid var(--border);border-radius:12px;padding:30px;position:relative;overflow:hidden;transition:all 0.3s}
+.edu-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:rgba(74,127,212,0.28)}
+.edu-bg{position:absolute;right:-12px;bottom:-12px;font-size:5.5rem;opacity:0.055}
+.edu-eyebrow{font-size:0.67rem;color:var(--teal);letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-weight:600;margin-bottom:10px}
+.edu-deg{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:800;color:var(--navy);margin-bottom:5px}
+.edu-uni{color:var(--sky);font-size:0.87rem;font-weight:600}
+
+/* CONTACT */
+#contact{background:linear-gradient(140deg,var(--navy) 0%,var(--navy2) 55%,#1C3670 100%);text-align:center}
+#contact .eyebrow{color:rgba(255,255,255,0.45);justify-content:center}
+#contact .eyebrow::before{background:var(--amber-l)}
+#contact h2.stitle{color:#fff}
+#contact h2.stitle em{color:var(--sky-l)}
+#contact .sdesc{color:rgba(255,255,255,0.58);margin:0 auto 40px}
+.contact-cards{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+.contact-card{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.17);padding:15px 22px;border-radius:10px;text-decoration:none;color:#fff;transition:all 0.25s;font-size:0.88rem;font-weight:600}
+.contact-card:hover{background:rgba(255,255,255,0.16);transform:translateY(-2px);border-color:rgba(255,255,255,0.38)}
+.contact-card .ci{font-size:1.2rem}
+
+/* FOOTER */
+footer{padding:26px 5vw;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--bg3)}
+.foot-name{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.1rem;font-weight:800;letter-spacing:2px}
+footer p{color:var(--text3);font-size:0.79rem}
+
+/* EDIT BADGE */
+.edit-note{position:fixed;bottom:18px;right:18px;z-index:300;background:var(--bg3);border:1.5px solid var(--border);color:var(--text2);padding:9px 15px;font-size:0.71rem;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;box-shadow:var(--shadow);transition:all 0.2s;display:flex;align-items:center;gap:7px}
+.edit-note:hover{border-color:var(--blue);color:var(--blue)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--sky);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><em>RAJENDRA</em></div>
+  <div class="nav-links">
+    <a href="#expertise">Expertise</a>
+    <a href="#skills">Skills</a>
+    <a href="#regions">Regions</a>
+    <a href="#services">Services</a>
+    <a href="#experience">Experience</a>
+    <a href="#legal">Legal</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb1"></div><div class="hero-orb2"></div><div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> Open to New Opportunities</div>
+      <h1 class="hero-name">
+        <em>RAJENDRA</em>
+        <span class="hero-subtitle">Recruitment &amp; Delivery Leader</span>
+      </h1>
+      <p class="hero-sub">14+ years of global expertise in building high-performing recruitment teams, managing enterprise client accounts, and driving talent acquisition across the US, LATAM, APAC, and India markets.</p>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num"><em>14</em>+</div><div class="stat-label">Years Exp.</div></div>
+        <div class="stat-item"><div class="stat-num"><em>4</em></div><div class="stat-label">Regions</div></div>
+        <div class="stat-item"><div class="stat-num"><em>3</em></div><div class="stat-label">Verticals</div></div>
+        <div class="stat-item"><div class="stat-num">LLB</div><div class="stat-label">Law Degree</div></div>
+      </div>
+      <div class="hero-cta">
+        <a href="#services" class="btn-primary">View Services →</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-lbl">Core Strengths</div>
+      <div class="hc-pill"><span>🎯</span> Global Recruitment</div>
+      <div class="hc-pill"><span>👥</span> People Management</div>
+      <div class="hc-pill"><span>🤝</span> Client Management</div>
+      <div class="hc-pill"><span>⚙️</span> HR Operations</div>
+      <div class="hc-pill"><span>⚖️</span> Legal Expertise</div>
+      <div class="hc-pill"><span>📊</span> Analytics &amp; KPIs</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="max-w">
+    <div class="eyebrow">Core Expertise</div>
+    <h2 class="stitle">Five Pillars of <em>Excellence</em></h2>
+    <p class="sdesc">A rare combination of hands-on recruitment, people leadership, client management, HR operations, and legal expertise — all under one professional.</p>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-num">01 / Recruitment</div>
+        <span class="exp-icon">🎯</span>
+        <h3>Recruitment</h3>
+        <p>End-to-end talent acquisition across IT, Non-IT, and Healthcare verticals. Expert in MSP/VMS portals, Boolean sourcing, US visa classifications, and all employment tax terms.</p>
+        <div class="exp-tags"><span class="exp-tag">US Staffing</span><span class="exp-tag">LATAM</span><span class="exp-tag">APAC</span><span class="exp-tag">India</span><span class="exp-tag">Healthcare</span><span class="exp-tag">IT / Non-IT</span></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-num">02 / People</div>
+        <span class="exp-icon">👥</span>
+        <h3>People Management</h3>
+        <p>Building, mentoring, and scaling high-performing recruitment teams globally. Proven ability to coach teams, design KPI frameworks, and run structured development programs.</p>
+        <div class="exp-tags"><span class="exp-tag">Team Leadership</span><span class="exp-tag">KPI Design</span><span class="exp-tag">Coaching</span><span class="exp-tag">Training</span></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-num">03 / Clients</div>
+        <span class="exp-icon">🤝</span>
+        <h3>Client Management</h3>
+        <p>SPOC for US State and Federal Government accounts. End-to-end delivery for TCS, Dell LATAM, Capgemini, American Express, and CTS across multiple geographies.</p>
+        <div class="exp-tags"><span class="exp-tag">Account Handling</span><span class="exp-tag">SLA Delivery</span><span class="exp-tag">Stakeholder Mgmt</span><span class="exp-tag">RFP/RFI</span></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-num">04 / HR Ops</div>
+        <span class="exp-icon">⚙️</span>
+        <h3>HR Operations</h3>
+        <p>US immigration support, onboarding lifecycle, background verification, SOW/PO management, policy documentation, and process compliance audits across regions.</p>
+        <div class="exp-tags"><span class="exp-tag">Immigration</span><span class="exp-tag">Onboarding</span><span class="exp-tag">Compliance</span><span class="exp-tag">Documentation</span></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-num">05 / Legal</div>
+        <span class="exp-icon">⚖️</span>
+        <h3>Legal Expertise</h3>
+        <p>LLB-qualified professional with expertise in employment law, contract drafting, legal policy creation, and compliance documentation — bridging HR operations with legal judgment.</p>
+        <div class="exp-tags"><span class="exp-tag">LLB Degree</span><span class="exp-tag">Policy Creation</span><span class="exp-tag">Contracts</span><span class="exp-tag">Compliance Docs</span></div>
+      </div>
+      <div class="exp-card" style="border-color:rgba(181,104,0,0.30);background:linear-gradient(135deg,#F5E6CE,#FDF6E8)">
+        <div class="exp-num">06 / Analytics</div>
+        <span class="exp-icon">📊</span>
+        <h3>Analytics &amp; Strategy</h3>
+        <p>Data-driven hiring using KPI dashboards, conversion ratio analytics, market intelligence, and process optimization to deliver measurable business outcomes.</p>
+        <div class="exp-tags"><span class="exp-tag">KPI Dashboards</span><span class="exp-tag">Hiring Analytics</span><span class="exp-tag">Reporting</span><span class="exp-tag">Process Design</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="max-w">
+    <div class="eyebrow">Skill Depth</div>
+    <h2 class="stitle">Core <em>Capabilities</em></h2>
+    <p class="sdesc">A deep, multi-dimensional skill set built across 14+ years of global recruitment and delivery practice.</p>
+    <div class="skills-grid">
+      <div class="skill-bars">
+        <div><div class="skill-hdr"><span class="skill-name">Recruitment &amp; Talent Acquisition</span><span class="skill-pct">98%</span></div><div class="skill-track"><div class="skill-fill" data-w="98"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">Team Leadership &amp; People Management</span><span class="skill-pct">95%</span></div><div class="skill-track"><div class="skill-fill" data-w="95"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">Client &amp; Stakeholder Management</span><span class="skill-pct">95%</span></div><div class="skill-track"><div class="skill-fill" data-w="95"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">US Staffing (Visas, Tax Terms)</span><span class="skill-pct">97%</span></div><div class="skill-track"><div class="skill-fill" data-w="97"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">MSP/VMS Portal Expertise</span><span class="skill-pct">94%</span></div><div class="skill-track"><div class="skill-fill" data-w="94"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">HR Operations &amp; Compliance</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill" data-w="90"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">Legal Documentation</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" data-w="88"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">Recruitment Analytics &amp; KPIs</span><span class="skill-pct">92%</span></div><div class="skill-track"><div class="skill-fill" data-w="92"></div></div></div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-lbl">Industry Vertical Mix</div>
+        <div class="chart-sub">Hiring distribution across verticals</div>
+        <div style="height:285px"><canvas id="vertChart"></canvas></div>
+      </div>
+    </div>
+    <div class="charts-2col">
+      <div class="chart-box">
+        <div class="chart-lbl">Staffing Model Expertise</div>
+        <div class="chart-sub">Breadth across engagement models</div>
+        <div style="height:240px"><canvas id="modelChart"></canvas></div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-lbl">Competency Radar</div>
+        <div class="chart-sub">Multi-dimensional skill profile</div>
+        <div style="height:240px"><canvas id="radarChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REGIONS — 4 cards -->
+<section id="regions">
+  <div class="max-w">
+    <div class="eyebrow">Geographic Reach</div>
+    <h2 class="stitle">Global Recruitment <em>Reach</em></h2>
+    <p class="sdesc">Primary expertise in the US and LATAM markets, with strong experience in APAC and India staffing — delivering talent across regions with cultural fluency and market depth.</p>
+    <div class="regions-grid">
+
+      <div class="region-card rc-usa">
+        <div class="region-deco">🇺🇸</div>
+        <span class="region-flag">🇺🇸</span>
+        <div class="region-name">United States</div>
+        <span class="region-badge">Primary Market</span>
+        <p class="region-desc">Deep expertise in US staffing across State and Federal Government accounts, enterprise clients, and all employment models — the highest volume and complexity delivery region.</p>
+        <ul class="region-list">
+          <li>State Govts: IN, FL, GA, VA, CT, MS, OR, CO, TN &amp; more</li>
+          <li>Federal: Naval Research Lab (NRL), USPTO</li>
+          <li>Enterprise: TCS, Dell, Capgemini, American Express, CTS</li>
+          <li>Visa types: H1B, EAD, Green Card, US Citizen</li>
+          <li>Tax terms: W2, C2C, 1099 — all models covered</li>
+          <li>IT, Non-IT &amp; Healthcare verticals</li>
+        </ul>
+      </div>
+
+      <div class="region-card rc-latam">
+        <div class="region-deco">🌎</div>
+        <span class="region-flag">🌎</span>
+        <div class="region-name">Latin America</div>
+        <span class="region-badge">Secondary Market</span>
+        <p class="region-desc">Hands-on LATAM recruitment delivery across multiple countries for global enterprise clients, managing local teams and navigating cross-border hiring processes.</p>
+        <ul class="region-list">
+          <li>Countries: Mexico, Panama, Brazil and more</li>
+          <li>Dell LATAM &amp; Capgemini LATAM delivery</li>
+          <li>Infrastructure and technical role hiring</li>
+          <li>Managed LATAM-based recruitment teams</li>
+          <li>Cross-border hiring compliance &amp; processes</li>
+          <li>Multi-lingual recruitment coordination</li>
+        </ul>
+      </div>
+
+      <div class="region-card rc-apac">
+        <div class="region-deco">🌏</div>
+        <span class="region-flag">🌏</span>
+        <div class="region-name">APAC</div>
+        <span class="region-badge">Regional Coverage</span>
+        <p class="region-desc">Experience supporting recruitment delivery for APAC-region requirements, working across time zones to manage candidate pipelines and deliver hiring outcomes for global accounts.</p>
+        <ul class="region-list">
+          <li>IT and infrastructure role hiring</li>
+          <li>Remote team coordination across APAC time zones</li>
+          <li>Client delivery for global enterprise accounts</li>
+          <li>Technical screening &amp; pipeline management</li>
+          <li>Cross-region stakeholder management</li>
+          <li>Compliance with regional hiring standards</li>
+        </ul>
+      </div>
+
+      <div class="region-card rc-india">
+        <div class="region-deco">🇮🇳</div>
+        <span class="region-flag">🇮🇳</span>
+        <div class="region-name">India</div>
+        <span class="region-badge">Home Market</span>
+        <p class="region-desc">Deep roots in India staffing — managing India-based recruitment teams, driving domestic hiring for global delivery centres, and full HR operations from Hyderabad.</p>
+        <ul class="region-list">
+          <li>IT, Non-IT &amp; BPO/KPO hiring</li>
+          <li>Building &amp; managing India-based recruiter teams</li>
+          <li>Campus, lateral &amp; leadership level hiring</li>
+          <li>Hyderabad delivery centre operations</li>
+          <li>HR operations, onboarding &amp; compliance</li>
+          <li>Training &amp; development for freshers &amp; laterals</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="max-w">
+    <div class="eyebrow">What I Offer</div>
+    <h2 class="stitle">Services &amp; <em>Engagement Models</em></h2>
+    <p class="sdesc">Choose the engagement model that works best for your organisation — from full-time leadership to specialised freelance support.</p>
+    <div class="svc-grid">
+      <div class="svc-card featured">
+        <div class="svc-badge">Featured</div>
+        <span class="svc-icon">🏆</span>
+        <h3>Full-Time Leadership Role</h3>
+        <p>Available as a full-time Recruitment Leader, Delivery Manager, or People &amp; Client Management Head for your organisation.</p>
+        <ul class="svc-list">
+          <li><span class="svc-dot"></span>Build and lead recruitment teams end-to-end</li>
+          <li><span class="svc-dot"></span>Manage enterprise client accounts &amp; delivery</li>
+          <li><span class="svc-dot"></span>Design recruitment strategies &amp; KPI frameworks</li>
+          <li><span class="svc-dot"></span>Drive HR operations and compliance</li>
+          <li><span class="svc-dot"></span>Mentor and develop recruitment talent</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🔍</span>
+        <h3>Freelance Recruitment</h3>
+        <p>On-demand recruitment for any role, any vertical, any region. Fast turnaround with quality-first delivery.</p>
+        <ul class="svc-list">
+          <li><span class="svc-dot"></span>IT, Non-IT &amp; Healthcare — all regions</li>
+          <li><span class="svc-dot"></span>US (all visa types), LATAM, APAC &amp; India</li>
+          <li><span class="svc-dot"></span>Contract, contract-to-hire &amp; permanent</li>
+          <li><span class="svc-dot"></span>Niche &amp; hard-to-fill requirements</li>
+          <li><span class="svc-dot"></span>Sourcing, screening &amp; pipeline management</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">📋</span>
+        <h3>Legal Documentation &amp; Review</h3>
+        <p>LLB-qualified expert for employment contracts, HR policies, and legal compliance documentation creation and review.</p>
+        <ul class="svc-list">
+          <li><span class="svc-dot"></span>Employment contract drafting &amp; review</li>
+          <li><span class="svc-dot"></span>HR policy manuals &amp; employee handbooks</li>
+          <li><span class="svc-dot"></span>Legal compliance documentation</li>
+          <li><span class="svc-dot"></span>Immigration &amp; visa documentation support</li>
+          <li><span class="svc-dot"></span>SOW, PO &amp; vendor agreement review</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="max-w">
+    <div class="eyebrow">Career Journey</div>
+    <h2 class="stitle">Professional <em>Experience</em></h2>
+    <p class="sdesc">A progressive career built on consistent performance, growing responsibility, and measurable delivery excellence.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-company">NYGCI</div>
+        <div class="tl-role">Recruitment &amp; Delivery Manager</div>
+        <div class="tl-period">Jun 2015 – Present &nbsp;·&nbsp; Hyderabad / Global</div>
+        <div class="tl-desc">Led global recruitment operations for enterprise clients across the US and LATAM, overseeing hiring pipelines, SLAs, team performance, onboarding, compliance, and VMS/MSP account management. Served as SPOC for multiple US State and Federal Government accounts including Naval Research Laboratory and USPTO. Supported TCS, Dell LATAM, and Capgemini across multiple countries. Designed recruiter KPI frameworks, built structured training modules, and scaled high-performing teams across India and LATAM.</div>
+        <div class="tl-chips"><span class="chip">Delivery Management</span><span class="chip">MSP/VMS</span><span class="chip">Team Leadership</span><span class="chip">US Government</span><span class="chip">LATAM</span><span class="chip">Healthcare</span><span class="chip">RFP/RFI</span><span class="chip">Immigration</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:rgba(74,127,212,0.5);box-shadow:0 0 0 4px rgba(74,127,212,0.1)"></div>
+        <div class="tl-company">Webilent Technologies Inc.</div>
+        <div class="tl-role">Sr. Talent Acquisition Specialist</div>
+        <div class="tl-desc">Handled complete recruitment lifecycle for IT positions across multiple clients through prime vendors. Managed end-to-end hiring for Capgemini, CTS, and American Express requirements. Built and maintained recruitment dashboards and coordinated documentation, interviews, and onboarding formalities.</div>
+        <div class="tl-chips"><span class="chip">IT Recruitment</span><span class="chip">ATS Management</span><span class="chip">Client Handling</span><span class="chip">Reporting</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:rgba(74,127,212,0.3);box-shadow:0 0 0 4px rgba(74,127,212,0.07)"></div>
+        <div class="tl-company">Canopy One Inc.</div>
+        <div class="tl-role">Recruiter</div>
+        <div class="tl-desc">Started career in US IT recruiting, handling full-cycle sourcing and screening through job boards and direct sourcing. Used Monster, Dice, TecFetch, and LinkedIn RPS to build candidate pipelines and supported senior management with pipeline reports and consultant database management.</div>
+        <div class="tl-chips"><span class="chip">US IT Recruiting</span><span class="chip">Direct Sourcing</span><span class="chip">Pipeline Mgmt</span><span class="chip">Boolean Search</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="max-w">
+    <div class="eyebrow">Technology Stack</div>
+    <h2 class="stitle">Tools &amp; <em>Platforms</em></h2>
+    <p class="sdesc">Hands-on expertise across the most widely used enterprise recruiting platforms and portals.</p>
+    <div class="tools-grid">
+      <div class="tool-group">
+        <div class="tg-label">MSP / VMS Portals</div>
+        <div class="tg-tags"><span class="tg-tag">SAP Fieldglass</span><span class="tg-tag">Beeline</span><span class="tg-tag">Covendis</span><span class="tg-tag">Dotstaff</span><span class="tg-tag">Vector VMS</span><span class="tg-tag">Bidsync</span><span class="tg-tag">Biddingo</span><span class="tg-tag">Knowledge Services</span><span class="tg-tag">Jaggaer</span><span class="tg-tag">Compaid</span></div>
+      </div>
+      <div class="tool-group">
+        <div class="tg-label">ATS Systems</div>
+        <div class="tg-tags"><span class="tg-tag">JobDiva</span><span class="tg-tag">Zoniac</span><span class="tg-tag">Ceipal</span></div>
+      </div>
+      <div class="tool-group">
+        <div class="tg-label">Job Boards &amp; Sourcing</div>
+        <div class="tg-tags"><span class="tg-tag">LinkedIn</span><span class="tg-tag">LinkedIn RPS</span><span class="tg-tag">Indeed</span><span class="tg-tag">Monster</span><span class="tg-tag">Dice</span><span class="tg-tag">CareerBuilder</span><span class="tg-tag">TecFetch</span></div>
+      </div>
+      <div class="tool-group">
+        <div class="tg-label">US Employment Knowledge</div>
+        <div class="tg-tags"><span class="tg-tag">H1B</span><span class="tg-tag">EAD</span><span class="tg-tag">Green Card</span><span class="tg-tag">US Citizen</span><span class="tg-tag">W2</span><span class="tg-tag">C2C</span><span class="tg-tag">1099</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LEGAL -->
+<section id="legal">
+  <div class="max-w">
+    <div class="eyebrow">Legal Background</div>
+    <h2 class="stitle">The Legal <em>Edge</em></h2>
+    <p class="sdesc">A rare combination — HR and Recruitment leadership backed by a formal Law degree, enabling expert legal documentation and compliance work.</p>
+    <div class="legal-layout">
+      <div class="legal-vis">
+        <span class="legal-icon-big">⚖️</span>
+        <div class="legal-deg">Bachelor of Laws (LLB)</div>
+        <div class="legal-uni">Osmania University, Hyderabad</div>
+        <div class="legal-div"></div>
+        <p class="legal-note">A formal legal qualification that uniquely bridges HR, people management, and operational compliance with sound legal judgment — setting this profile apart from typical recruitment professionals.</p>
+      </div>
+      <div class="legal-caps">
+        <div class="lc"><div class="lc-icon">📝</div><div><h4>Contract Drafting &amp; Review</h4><p>Employment agreements, vendor contracts, SOWs, and service agreements reviewed and drafted with legal precision.</p></div></div>
+        <div class="lc"><div class="lc-icon">📚</div><div><h4>HR Policy Documentation</h4><p>Creation of HR policy manuals, employee handbooks, and operational guidelines aligned with legal requirements.</p></div></div>
+        <div class="lc"><div class="lc-icon">🛡️</div><div><h4>Legal Compliance Frameworks</h4><p>Designing and implementing compliance documentation to ensure adherence to employment laws and regulatory standards.</p></div></div>
+        <div class="lc"><div class="lc-icon">🌐</div><div><h4>Immigration &amp; Visa Documentation</h4><p>End-to-end support for US immigration processes, visa applications, and related legal documentation.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="max-w">
+    <div class="eyebrow">Academic Background</div>
+    <h2 class="stitle">Education &amp; <em>Qualifications</em></h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-bg">💻</div>
+        <div class="edu-eyebrow">Technology</div>
+        <div class="edu-deg">Bachelor of Science — Computer Science</div>
+        <div class="edu-uni">JNTU — Jawaharlal Nehru Technological University</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-bg">⚖️</div>
+        <div class="edu-eyebrow">Law</div>
+        <div class="edu-deg">Bachelor of Laws (LLB)</div>
+        <div class="edu-uni">Osmania University, Hyderabad</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="max-w">
+    <div class="eyebrow">Let's Connect</div>
+    <h2 class="stitle">Ready to Work <em>Together?</em></h2>
+    <p class="sdesc">Whether you need a recruitment leader, a skilled recruiter, or legal documentation expertise — let's talk.</p>
+    <div class="contact-cards">
+      <a href="tel:+919291679167" class="contact-card"><span class="ci">📞</span> +91 92916 79167</a>
+      <a href="mailto:src559@gmail.com" class="contact-card"><span class="ci">✉️</span> src559@gmail.com</a>
+    </div>
+    <div style="margin-top:40px">
+      <a href="#services" class="btn-primary">Explore Services →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-name">RAJENDRA</div>
+  <p>Recruitment &amp; Delivery Manager · Legal Expert · People Leader</p>
+  <p>Hyderabad, India · Global</p>
+</footer>
+
+<div class="edit-note" onclick="this.remove()">✏️ Editable HTML — click to dismiss</div>
+
+<script>
+// SKILL BAR ANIMATION
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting)
+      document.querySelectorAll('.skill-fill').forEach(b => b.style.width = b.dataset.w + '%');
+  });
+}, {threshold:0.3});
+const sk = document.querySelector('#skills');
+if(sk) obs.observe(sk);
+
+// CHARTS
+const sky='#2D6BBF', teal='#097A6A', amber='#B56800', coral='#B83425', navy='#0F1D3A';
+const txt2='#1E3060', txt3='#3D5080';
+Chart.defaults.color = txt2;
+Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+// Doughnut
+new Chart(document.getElementById('vertChart'),{
+  type:'doughnut',
+  data:{
+    labels:['IT / Technology','Non-IT','Healthcare'],
+    datasets:[{data:[55,25,20],backgroundColor:[sky,teal,coral],borderColor:'#fff',borderWidth:3,hoverOffset:10}]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,cutout:'70%',
+    plugins:{legend:{position:'bottom',labels:{padding:18,font:{size:12},color:txt2}}}
+  }
+});
+
+// Bar
+new Chart(document.getElementById('modelChart'),{
+  type:'bar',
+  data:{
+    labels:['Contract','Permanent','MSP/RPO','Government','LATAM','India'],
+    datasets:[{data:[98,88,95,90,82,85],backgroundColor:[sky,teal,sky,amber,teal,coral],borderRadius:4,borderSkipped:false}]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    scales:{
+      y:{min:65,max:100,grid:{color:'rgba(29,58,122,0.10)'},ticks:{callback:v=>v+'%',color:txt3}},
+      x:{grid:{display:false},ticks:{color:txt3,font:{size:11}}}
+    },
+    plugins:{legend:{display:false}}
+  }
+});
+
+// Radar
+new Chart(document.getElementById('radarChart'),{
+  type:'radar',
+  data:{
+    labels:['Recruitment','People Mgmt','Client Mgmt','HR Ops','Legal','Analytics'],
+    datasets:[{data:[98,95,94,90,88,92],backgroundColor:'rgba(74,127,212,0.1)',borderColor:sky,pointBackgroundColor:sky,pointRadius:4,borderWidth:2}]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    scales:{r:{min:70,max:100,grid:{color:'rgba(29,58,122,0.13)'},angleLines:{color:'rgba(29,58,122,0.13)'},ticks:{display:false},pointLabels:{font:{size:11},color:txt2}}},
+    plugins:{legend:{display:false}}
+  }
+});
+
+// NAV HIGHLIGHT
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id});
+  navAs.forEach(a=>{
+    const on=a.getAttribute('href')==='#'+cur;
+    a.style.color=on?'#2E4A8C':'';
+    a.style.borderBottomColor=on?'#C97A08':'transparent';
+  });
+});
+</script>
+</body>
+</html>
