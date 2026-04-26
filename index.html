@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -290,9 +291,9 @@ h2.stitle em{color:var(--sky);font-style:normal}
 #education{background:var(--bg)}
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}
 @media(max-width:580px){.edu-grid{grid-template-columns:1fr}}
-.edu-card{background:var(--bg3);border:1.5px solid var(--border);border-radius:12px;padding:30px;position:relative;overflow:hidden;transition:all 0.3s}
+.edu-card{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1.5px solid var(--border);border-radius:12px;padding:40px 34px;position:relative;overflow:hidden;transition:all 0.3s;min-height:160px}
 .edu-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2);border-color:rgba(74,127,212,0.28)}
-.edu-bg{position:absolute;right:-12px;bottom:-12px;font-size:5.5rem;opacity:0.055}
+.edu-bg{position:absolute;right:-8px;bottom:-8px;font-size:7rem;opacity:0.18}
 .edu-eyebrow{font-size:0.67rem;color:var(--teal);letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-weight:600;margin-bottom:10px}
 .edu-deg{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:800;color:var(--navy);margin-bottom:5px}
 .edu-uni{color:var(--sky);font-size:0.87rem;font-weight:600}
@@ -313,10 +314,6 @@ h2.stitle em{color:var(--sky);font-style:normal}
 footer{padding:26px 5vw;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--bg3)}
 .foot-name{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.1rem;font-weight:800;letter-spacing:2px}
 footer p{color:var(--text3);font-size:0.79rem}
-
-/* EDIT BADGE */
-.edit-note{position:fixed;bottom:18px;right:18px;z-index:300;background:var(--bg3);border:1.5px solid var(--border);color:var(--text2);padding:9px 15px;font-size:0.71rem;border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;box-shadow:var(--shadow);transition:all 0.2s;display:flex;align-items:center;gap:7px}
-.edit-note:hover{border-color:var(--blue);color:var(--blue)}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:5px}
@@ -552,9 +549,9 @@ footer p{color:var(--text3);font-size:0.79rem}
 <!-- SERVICES -->
 <section id="services">
   <div class="max-w">
-    <div class="eyebrow">What I Offer</div>
+    <div class="eyebrow">Services</div>
     <h2 class="stitle">Services &amp; <em>Engagement Models</em></h2>
-    <p class="sdesc">Choose the engagement model that works best for your organisation — from full-time leadership to specialised freelance support.</p>
+    <p class="sdesc">Primarily seeking a <strong>full-time leadership role</strong> — also open to freelance recruitment and legal documentation engagements.</p>
     <div class="svc-grid">
       <div class="svc-card featured">
         <div class="svc-badge">Featured</div>
@@ -720,7 +717,11 @@ footer p{color:var(--text3);font-size:0.79rem}
     <h2 class="stitle">Ready to Work <em>Together?</em></h2>
     <p class="sdesc">Whether you need a recruitment leader, a skilled recruiter, or legal documentation expertise — let's talk.</p>
     <div class="contact-cards">
-      <a href="tel:+919291679167" class="contact-card"><span class="ci">📞</span> +91 92916 79167</a>
+      <div class="contact-card phone-reveal-card" onclick="revealPhone(this)" style="cursor:pointer;">
+        <span class="ci">📞</span>
+        <span class="phone-hidden-text">Click to reveal phone number</span>
+        <span class="phone-actual" style="display:none;">+91 92916 79167</span>
+      </div>
       <a href="mailto:src559@gmail.com" class="contact-card"><span class="ci">✉️</span> src559@gmail.com</a>
     </div>
     <div style="margin-top:40px">
@@ -736,9 +737,17 @@ footer p{color:var(--text3);font-size:0.79rem}
   <p>Hyderabad, India · Global</p>
 </footer>
 
-<div class="edit-note" onclick="this.remove()">✏️ Editable HTML — click to dismiss</div>
+
 
 <script>
+// PHONE REVEAL
+function revealPhone(card) {
+  card.querySelector('.phone-hidden-text').style.display = 'none';
+  const num = card.querySelector('.phone-actual');
+  num.style.display = 'inline';
+  card.onclick = function(){ window.location.href='tel:+919291679167'; };
+}
+
 // SKILL BAR ANIMATION
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
