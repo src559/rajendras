@@ -182,7 +182,7 @@ h2.stitle em{color:var(--sky);font-style:normal}
 .skill-name{color:var(--text2);font-weight:600}
 .skill-pct{color:var(--sky);font-family:'JetBrains Mono',monospace;font-size:0.77rem}
 .skill-track{height:6px;background:rgba(29,58,122,0.16);border-radius:3px;overflow:hidden}
-.skill-fill{height:100%;border-radius:3px;background:linear-gradient(to right,var(--sky),var(--teal));width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
+.skill-fill{height:100%;border-radius:3px;background:linear-gradient(to right,#1D5FBF,#0A9E8A);width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
 .chart-box{background:var(--bg3);border:1.5px solid var(--border);border-radius:12px;padding:26px}
 .chart-lbl{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:5px}
 .chart-sub{font-size:0.77rem;color:var(--text3);margin-bottom:18px}
@@ -315,6 +315,32 @@ footer{padding:26px 5vw;border-top:1px solid var(--border);display:flex;align-it
 .foot-name{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.1rem;font-weight:800;letter-spacing:2px}
 footer p{color:var(--text3);font-size:0.79rem}
 
+/* WATERMARK */
+.watermark-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.watermark-overlay::before{
+  content:'RAJENDRA';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-35deg);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(5rem,14vw,11rem);
+  font-weight:800;
+  color:rgba(29,58,122,0.04);
+  white-space:nowrap;
+  letter-spacing:0.15em;
+  pointer-events:none;
+  user-select:none;
+}
+/* Section-specific watermark icons */
+#expertise{position:relative;}
+#expertise::before{content:'💼';position:absolute;right:5%;top:10%;font-size:8rem;opacity:0.04;pointer-events:none;z-index:0;}
+#skills{position:relative;}
+#skills::before{content:'⚖️';position:absolute;left:4%;top:8%;font-size:8rem;opacity:0.04;pointer-events:none;z-index:0;}
+#skills::after{content:'💻';position:absolute;right:4%;bottom:8%;font-size:8rem;opacity:0.04;pointer-events:none;z-index:0;}
+
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -322,6 +348,7 @@ footer p{color:var(--text3);font-size:0.79rem}
 </style>
 </head>
 <body>
+<div class="watermark-overlay"></div>
 
 <!-- NAV -->
 <nav>
@@ -423,12 +450,71 @@ footer p{color:var(--text3);font-size:0.79rem}
         <div class="exp-tags"><span class="exp-tag">KPI Dashboards</span><span class="exp-tag">Hiring Analytics</span><span class="exp-tag">Reporting</span><span class="exp-tag">Process Design</span></div>
       </div>
     </div>
+
+    <!-- Additional Operational Expertise -->
+    <div style="margin-top:40px;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1.5px solid var(--border);border-radius:16px;padding:36px 40px;">
+      <div style="font-size:0.67rem;color:var(--teal);letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-weight:600;margin-bottom:10px;">Additional Expertise</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:800;color:var(--navy);margin-bottom:20px;">Operational & Delivery Excellence</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:8px;">
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(45,107,191,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #2D6BBF;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">📋</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">RFP Management</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Prepared and responded to competitive RFPs — coordinating with internal teams and ensuring timely, quality submissions for enterprise clients.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(45,107,191,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #2D6BBF;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">🔍</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">Multi-Level Screening</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Designed and implemented multi-level screening frameworks that significantly improved candidate quality and reduced time-to-fill across delivery teams.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(9,122,106,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #097A6A;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">✅</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">Onboarding & Formalities</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">End-to-end onboarding management — documentation, compliance checks, system access, and new hire orientation across multiple geographies.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(9,122,106,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #097A6A;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">🛡️</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">Background Verification</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Managed pre-employment screening including criminal, education, employment history, and reference checks for all levels of hiring.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(181,104,0,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #B56800;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">🖥️</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">Technical Screening</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Conducted technical screening interviews for IT and non-IT roles — evaluating domain knowledge, communication, and role fitment before client submissions.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(181,104,0,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #B56800;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">🏅</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">Diversity Certifications</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Obtained and renewed Diversity Certifications (MBE, WBE, CPUC, DBE) — coordinating with certifying bodies and maintaining all compliance documentation.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(45,107,191,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #2D6BBF;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">💻</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">IT Technology Hiring</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Extensive IT hiring experience across Software Development, Infrastructure, Cloud/DevOps, Network Engineering, Cybersecurity, Systems Admin, and Data Center roles across US, LATAM, APAC & India.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(9,122,106,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #097A6A;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">🏢</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">Non-IT Hiring</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Broad non-IT recruitment covering Finance, Accounting, Operations, Supply Chain, Legal, HR, and Administrative roles across multiple industries and geographies.</div>
+        </div>
+
+        <div style="background:var(--bg3);border:1.5px solid rgba(184,52,37,0.25);border-radius:14px;padding:22px 20px;border-top:4px solid #B83425;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">🏥</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.95rem;margin-bottom:6px;">Healthcare Hiring</div>
+          <div style="color:var(--text3);font-size:0.84rem;line-height:1.65;">Specialized healthcare recruitment for Nurses, Allied Health, Clinical, and Healthcare IT professionals — working with hospitals, staffing agencies, and MSP programs.</div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
-
-<div class="divider"></div>
-
-<!-- SKILLS -->
 <section id="skills">
   <div class="max-w">
     <div class="eyebrow">Skill Depth</div>
@@ -437,7 +523,7 @@ footer p{color:var(--text3);font-size:0.79rem}
     <div class="skills-grid">
       <div class="skill-bars">
         <div><div class="skill-hdr"><span class="skill-name">Recruitment &amp; Talent Acquisition</span><span class="skill-pct">98%</span></div><div class="skill-track"><div class="skill-fill" data-w="98"></div></div></div>
-        <div><div class="skill-hdr"><span class="skill-name">Team Leadership &amp; People Management</span><span class="skill-pct">95%</span></div><div class="skill-track"><div class="skill-fill" data-w="95"></div></div></div>
+        <div><div class="skill-hdr"><span class="skill-name">Team Leadership &amp; People Management</span><span class="skill-pct">99%</span></div><div class="skill-track"><div class="skill-fill" data-w="99"></div></div></div>
         <div><div class="skill-hdr"><span class="skill-name">Client &amp; Stakeholder Management</span><span class="skill-pct">95%</span></div><div class="skill-track"><div class="skill-fill" data-w="95"></div></div></div>
         <div><div class="skill-hdr"><span class="skill-name">US Staffing (Visas, Tax Terms)</span><span class="skill-pct">97%</span></div><div class="skill-track"><div class="skill-fill" data-w="97"></div></div></div>
         <div><div class="skill-hdr"><span class="skill-name">MSP/VMS Portal Expertise</span><span class="skill-pct">94%</span></div><div class="skill-track"><div class="skill-fill" data-w="94"></div></div></div>
@@ -451,16 +537,50 @@ footer p{color:var(--text3);font-size:0.79rem}
         <div style="height:285px"><canvas id="vertChart"></canvas></div>
       </div>
     </div>
-    <div class="charts-2col">
-      <div class="chart-box">
-        <div class="chart-lbl">Staffing Model Expertise</div>
-        <div class="chart-sub">Breadth across engagement models</div>
-        <div style="height:240px"><canvas id="modelChart"></canvas></div>
+
+    <!-- Replace 2 graphs with attractive domain cards -->
+    <div style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;">
+      <div style="background:linear-gradient(135deg,#1D3A7A,#2D6BBF);border-radius:16px;padding:28px 26px;color:#fff;position:relative;overflow:hidden;">
+        <div style="font-size:2.4rem;margin-bottom:12px;">🤝</div>
+        <div style="font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;opacity:0.7;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">Contract Staffing</div>
+        <div style="font-size:2.2rem;font-weight:800;font-family:'Cormorant Garamond',serif;">98%</div>
+        <div style="font-size:0.82rem;opacity:0.85;margin-top:6px;">Full-cycle contract delivery across US, LATAM & APAC</div>
+        <div style="position:absolute;right:-18px;bottom:-18px;font-size:5rem;opacity:0.08;">📋</div>
       </div>
-      <div class="chart-box">
-        <div class="chart-lbl">Competency Radar</div>
-        <div class="chart-sub">Multi-dimensional skill profile</div>
-        <div style="height:240px"><canvas id="radarChart"></canvas></div>
+      <div style="background:linear-gradient(135deg,#097A6A,#12A891);border-radius:16px;padding:28px 26px;color:#fff;position:relative;overflow:hidden;">
+        <div style="font-size:2.4rem;margin-bottom:12px;">🏢</div>
+        <div style="font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;opacity:0.7;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">Permanent Hiring</div>
+        <div style="font-size:2.2rem;font-weight:800;font-family:'Cormorant Garamond',serif;">88%</div>
+        <div style="font-size:0.82rem;opacity:0.85;margin-top:6px;">End-to-end permanent placement & leadership hiring</div>
+        <div style="position:absolute;right:-18px;bottom:-18px;font-size:5rem;opacity:0.08;">🎯</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#1D3A7A,#4472C4);border-radius:16px;padding:28px 26px;color:#fff;position:relative;overflow:hidden;">
+        <div style="font-size:2.4rem;margin-bottom:12px;">⚙️</div>
+        <div style="font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;opacity:0.7;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">MSP / RPO</div>
+        <div style="font-size:2.2rem;font-weight:800;font-family:'Cormorant Garamond',serif;">95%</div>
+        <div style="font-size:0.82rem;opacity:0.85;margin-top:6px;">SAP Fieldglass, Beeline, Covendis, DotStaff & more</div>
+        <div style="position:absolute;right:-18px;bottom:-18px;font-size:5rem;opacity:0.08;">🔧</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#B56800,#D98A10);border-radius:16px;padding:28px 26px;color:#fff;position:relative;overflow:hidden;">
+        <div style="font-size:2.4rem;margin-bottom:12px;">🏛️</div>
+        <div style="font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;opacity:0.7;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">Government / Public Sector</div>
+        <div style="font-size:2.2rem;font-weight:800;font-family:'Cormorant Garamond',serif;">90%</div>
+        <div style="font-size:0.82rem;opacity:0.85;margin-top:6px;">Cleared roles, compliance-heavy delivery environments</div>
+        <div style="position:absolute;right:-18px;bottom:-18px;font-size:5rem;opacity:0.08;">⚖️</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#097A6A,#0D6B5A);border-radius:16px;padding:28px 26px;color:#fff;position:relative;overflow:hidden;">
+        <div style="font-size:2.4rem;margin-bottom:12px;">🌎</div>
+        <div style="font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;opacity:0.7;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">LATAM Markets</div>
+        <div style="font-size:2.2rem;font-weight:800;font-family:'Cormorant Garamond',serif;">82%</div>
+        <div style="font-size:0.82rem;opacity:0.85;margin-top:6px;">Mexico, Brazil, Colombia & LatAm tech talent pipelines</div>
+        <div style="position:absolute;right:-18px;bottom:-18px;font-size:5rem;opacity:0.08;">🌍</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#B83425,#D94535);border-radius:16px;padding:28px 26px;color:#fff;position:relative;overflow:hidden;">
+        <div style="font-size:2.4rem;margin-bottom:12px;">🇮🇳</div>
+        <div style="font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;opacity:0.7;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">India Hiring</div>
+        <div style="font-size:2.2rem;font-weight:800;font-family:'Cormorant Garamond',serif;">85%</div>
+        <div style="font-size:0.82rem;opacity:0.85;margin-top:6px;">IT, Non-IT & leadership hiring across Indian markets</div>
+        <div style="position:absolute;right:-18px;bottom:-18px;font-size:5rem;opacity:0.08;">🏙️</div>
       </div>
     </div>
   </div>
@@ -774,37 +894,6 @@ new Chart(document.getElementById('vertChart'),{
   options:{
     responsive:true,maintainAspectRatio:false,cutout:'70%',
     plugins:{legend:{position:'bottom',labels:{padding:18,font:{size:12},color:txt2}}}
-  }
-});
-
-// Bar
-new Chart(document.getElementById('modelChart'),{
-  type:'bar',
-  data:{
-    labels:['Contract','Permanent','MSP/RPO','Government','LATAM','India'],
-    datasets:[{data:[98,88,95,90,82,85],backgroundColor:[sky,teal,sky,amber,teal,coral],borderRadius:4,borderSkipped:false}]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    scales:{
-      y:{min:65,max:100,grid:{color:'rgba(29,58,122,0.10)'},ticks:{callback:v=>v+'%',color:txt3}},
-      x:{grid:{display:false},ticks:{color:txt3,font:{size:11}}}
-    },
-    plugins:{legend:{display:false}}
-  }
-});
-
-// Radar
-new Chart(document.getElementById('radarChart'),{
-  type:'radar',
-  data:{
-    labels:['Recruitment','People Mgmt','Client Mgmt','HR Ops','Legal','Analytics'],
-    datasets:[{data:[98,95,94,90,88,92],backgroundColor:'rgba(74,127,212,0.1)',borderColor:sky,pointBackgroundColor:sky,pointRadius:4,borderWidth:2}]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    scales:{r:{min:70,max:100,grid:{color:'rgba(29,58,122,0.13)'},angleLines:{color:'rgba(29,58,122,0.13)'},ticks:{display:false},pointLabels:{font:{size:11},color:txt2}}},
-    plugins:{legend:{display:false}}
   }
 });
 
